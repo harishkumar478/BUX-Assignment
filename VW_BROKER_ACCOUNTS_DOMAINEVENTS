@@ -1,0 +1,40 @@
+----- Convert BROKER_ACCOUNTS_DOMAINEVENTS to relational structure -----
+CREATE VIEW VW_BROKER_ACCOUNTS_DOMAINEVENTS_SOURCE AS
+Select
+TIMESTAMP as TIMESTAMP,
+PAYLOAD:correlationId::string as CORRELATION_ID,
+PAYLOAD:event.appropriatenessScore::number as APPROPRIATENESS_SCORE,
+PAYLOAD:event.buxUserAccountNumber::string as BUX_USERACCOUNT_NUMBER,
+PAYLOAD:event.buxUserAccountType::string as BUX_USERACCOUNT_TYPE,
+PAYLOAD:event.currency::string as ACCOUNTS_CURRENCY,
+PAYLOAD:event.currentAddress.city::string as CITY,
+PAYLOAD:event.currentAddress.country::string as COUNTRY,
+--PAYLOAD:event.currentAddress.number::number as CITY,
+--PAYLOAD:event.currentAddress.postalcode::string as CITY,
+--PAYLOAD:event.currentAddress.street::string as CITY
+PAYLOAD:event.language::string as LANGUAGE,
+PAYLOAD:event.masterLedgerId::string as MASTER_LEDGER_ID,
+PAYLOAD:event.personalDetails.cityOfBirth::string as CITY_OF_BIRTH,
+PAYLOAD:event.personalDetails.countryOfBirth::string as COUNTRY_OF_BIRTH,
+PAYLOAD:event.personalDetails.gender::string as GENDER,
+PAYLOAD:event.personalDetails.nationality::string as NATIONALITY,
+--PAYLOAD:event.registrationTime::time as REGISTRATION_TIME
+PAYLOAD:event.riskScore::number as RISK_SCORE,
+PAYLOAD:event.sanctionscheck.possibleMatch::string as POSSIBLE_MATCH,
+PAYLOAD:event.sanctionscheck.searchResultUrl::string as SEARCH_RESULT_URL,
+PAYLOAD:event.subscriptionType::string as SUBSCRIPTION_TYPE,
+--PAYLOAD:event.transactionReportingDetails.nationality::string as TRANSACTION_NATIONALITY,
+--PAYLOAD:event.transactionReportingDetails.reportingNumberType::string as TRANSACTION_REPORTINGNUMBER_TYPE,
+PAYLOAD:event.userId::string as ACCOUNTS_USER_ID,
+PAYLOAD:generation.id::string as ACCOUNTS_GENERATION_ID,
+PAYLOAD:generation.partitionKey::string as GENERATION_PARTITION_KEY,
+PAYLOAD:generation.privacykey::string as GENERATION_PRIVACY_KEY,
+PAYLOAD:generation.producingServiceId::string as PRODUCING_SERVICE_ID,
+PAYLOAD:generation.producingServiceVersion::string as PRODUCING_SERVICE_VERSION,
+PAYLOAD:streamInfo.entityType::string as ACCOUNT_ENTITY_TYPE,
+PAYLOAD:streamInfo.id::string as STREAM_INFO_ID,
+PAYLOAD:streamInfo.primary::string as STREAM_INFO_PRIMARY,
+PAYLOAD:transactionId::string as TRANSACTION_ID,
+PAYLOAD:type::string as ACCOUNT_TYPE,
+PAYLOAD:version::number as VERSION
+from EXT_ANALYTICS_ENGINEER_RAW.INGESTED.BROKER_ACCOUNTS_DOMAINEVENTS;
